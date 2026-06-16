@@ -1,3 +1,10 @@
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
 # Logs
 logs
 *.log
@@ -39,3 +46,4 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
