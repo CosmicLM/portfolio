@@ -21,28 +21,21 @@ export default function BlochSphere({
   className = "",
 }: BlochSphereProps) {
   const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<{
-    renderer: THREE.WebGLRenderer;
-    scene: THREE.Scene;
-    camera: THREE.PerspectiveCamera;
-    stateVector: THREE.ArrowHelper;
-    animFrame: number;
-    isDragging: boolean;
-    prevMouse: { x: number; y: number };
-    sphereGroup: THREE.Group;
-    theta: number;
-    phi: number;
-    autoRotate: boolean;
-  } | null>(null);
-
   const [stateLabel, setStateLabel] = useState({ theta: initialTheta, phi: initialPhi });
+  const [webglError, setWebglError] = useState(false);
 
   useEffect(() => {
     if (!mountRef.current) return;
     const el = mountRef.current;
 
     // ── Renderer ──────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch {
+      setWebglError(true);
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(480, 480, false);
@@ -139,7 +132,6 @@ export default function BlochSphere({
         Math.sin(t) * Math.sin(p)
       ).normalize();
       stateVector.setDirection(dir);
-      setStateLabel({ theta: t, phi: p });
     };
 
     // ── Mouse/Touch interaction ───────────────────────────────
@@ -184,9 +176,9 @@ export default function BlochSphere({
 
     // ── Animation loop ────────────────────────────────────────
     let frame = 0;
+    let rafId = 0;
     const animate = () => {
-      const animFrame = requestAnimationFrame(animate);
-      sceneRef.current!.animFrame = animFrame;
+      rafId = requestAnimationFrame(animate);
 
       frame++;
       // Slow precession of the state vector
@@ -194,6 +186,11 @@ export default function BlochSphere({
         phi += 0.004;
         theta = initialTheta + Math.sin(frame * 0.005) * 0.15;
         updateStateVector(theta, phi);
+        // Throttle the React-driven text readout — the 3D scene still
+        // renders every frame, only the label re-render is capped.
+        if (frame % 4 === 0) {
+          setStateLabel({ theta, phi });
+        }
         if (autoRotate) {
           sphereGroup.rotation.y += 0.003;
         }
@@ -202,15 +199,24 @@ export default function BlochSphere({
       renderer.render(scene, camera);
     };
 
-    const animFrame = requestAnimationFrame(animate);
-
-    sceneRef.current = {
-      renderer, scene, camera, stateVector, animFrame,
-      isDragging, prevMouse, sphereGroup, theta, phi, autoRotate,
-    };
+    // Pause the render/animation loop entirely while the widget is
+    // scrolled out of view, instead of burning CPU forever off-screen.
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!rafId) animate();
+        } else if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(el);
 
     return () => {
-      cancelAnimationFrame(animFrame);
+      visibilityObserver.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
       if (interactive) {
         renderer.domElement.removeEventListener("mousedown", onMouseDown);
         window.removeEventListener("mousemove", onMouseMove);
@@ -226,6 +232,26 @@ export default function BlochSphere({
 
   const alpha2 = Math.cos(stateLabel.theta / 2) ** 2;
   const beta2 = Math.sin(stateLabel.theta / 2) ** 2;
+
+  if (webglError) {
+    return (
+      <div className="bloch-frame" aria-hidden="true">
+        <div className="bloch-sphere" />
+        <div className="bloch-orbit bloch-orbit-large" />
+        <div className="bloch-orbit bloch-orbit-small" />
+        <div className="bloch-axis bloch-axis-horizontal" />
+        <div className="bloch-axis bloch-axis-vertical" />
+        <div className="bloch-axis bloch-axis-depth" />
+        <div className="bloch-equator" />
+        <div className="bloch-meridian" />
+        <div className="bloch-state" />
+        <div className="bloch-pole bloch-pole-top" />
+        <div className="bloch-pole bloch-pole-bottom" />
+        <div className="bloch-label bloch-label-top">|0⟩</div>
+        <div className="bloch-label bloch-label-bottom">|1⟩</div>
+      </div>
+    );
+  }
 
   return (
     <div

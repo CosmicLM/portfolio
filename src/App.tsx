@@ -70,11 +70,10 @@ export default function App() {
       <header className="site-header">
         <div className="shell header-inner">
           <button className="brand" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            
-           <a href="/" className="logo-group">
-  <span className="brand-mark">ψ</span> 
-  <span className="logo-text">EFSL</span>
-</a>
+            <span className="logo-group">
+              <span className="brand-mark">ψ</span>
+              <span className="logo-text">EFSL</span>
+            </span>
           </button>
 
           <nav className="site-nav" aria-label="Primary">
@@ -119,7 +118,7 @@ export default function App() {
               <div className="fact-list">
                 <div>
                   <span>Location</span>
-                  <strong>Salvador, Bahia, Brazil</strong>
+                  <strong>Salt Lake City, Utah, USA</strong>
                 </div>
                 <div>
                   <span>Focus</span>
@@ -131,7 +130,7 @@ export default function App() {
                 </div>
                 <div>
                   <span>Stack</span>
-                  <strong>Python · Rust · Qiskit</strong>
+                  <strong>Python · Rust · Qiskit · Java</strong>
                 </div>
               </div>
             </article>
@@ -189,7 +188,7 @@ export default function App() {
             <article className="card project-card">
               <div className="card-head">
                 <div>
-                  <h3>HyprAI</h3>
+                  <h3>Florinda·AI</h3>
                   <p className="project-meta">AI assistant for quantum development</p>
                 </div>
                 <span className="badge">Prototype</span>
@@ -208,7 +207,7 @@ export default function App() {
                 <li>Explored integration points for quantum tooling</li>
               </ul>
               <div className="link-row">
-                <a href="https://github.com/your-repo">GitHub →</a>
+                <a href="https://github.com/CosmicLM/florinda-ai">GitHub →</a>
               </div>
             </article>
 
@@ -229,7 +228,7 @@ export default function App() {
                 <span className="tag">Research</span>
               </div>
               <div className="link-row">
-                <a href="https://github.com/your-repo">GitHub →</a>
+                <a href="https://github.com/CosmicLM/quantum-projects">GitHub →</a>
               </div>
             </article>
           </div>
@@ -296,10 +295,9 @@ export default function App() {
               I’m always interested in collaborating on interesting projects or discussing quantum computing, error mitigation, and software engineering. Feel free to reach out.
             </p>
             <div className="link-row contact-links">
-              <a href="mailto:your.email@example.com">Email</a>
-              <a href="https://github.com/your-github">GitHub</a>
-              <a href="https://linkedin.com/in/your-linkedin">LinkedIn</a>
-              <a href="https://twitter.com/your-twitter">X / Twitter</a>
+              <a href="mailto:edsouzalb@gmail.com">Email</a>
+              <a href="https://github.com/CosmicLM">GitHub</a>
+              <a href="https://www.linkedin.com/in/edusouzalima">LinkedIn</a>
             </div>
           </div>
         </section>
