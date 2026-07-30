@@ -149,7 +149,7 @@ main {
 
 .bloch-widget {
   width: min(100%, 480px);
-  height: 480px;
+  aspect-ratio: 1;
 }
 
 .bloch-frame {
@@ -686,14 +686,13 @@ h1 {
   }
 
   .header-inner {
-
-  .bloch-widget {
-    width: min(100%, 360px);
-    height: 360px;
-  }
     flex-direction: column;
     justify-content: center;
     padding-block: 0.9rem;
+  }
+
+  .bloch-widget {
+    width: min(100%, 360px);
   }
 
   .site-nav {

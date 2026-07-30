@@ -119,7 +119,7 @@ export default function App() {
               <div className="fact-list">
                 <div>
                   <span>Location</span>
-                  <strong>Salvador, Bahia, Brazil</strong>
+                  <strong>Salt Lake City, Utah, USA</strong>
                 </div>
                 <div>
                   <span>Focus</span>
@@ -131,7 +131,7 @@ export default function App() {
                 </div>
                 <div>
                   <span>Stack</span>
-                  <strong>Python · Rust · Qiskit</strong>
+                  <strong>Python · Rust · Qiskit · Java</strong>
                 </div>
               </div>
             </article>
@@ -189,7 +189,7 @@ export default function App() {
             <article className="card project-card">
               <div className="card-head">
                 <div>
-                  <h3>HyprAI</h3>
+                  <h3>Florinda·AI</h3>
                   <p className="project-meta">AI assistant for quantum development</p>
                 </div>
                 <span className="badge">Prototype</span>
