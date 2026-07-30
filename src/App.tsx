@@ -70,11 +70,10 @@ export default function App() {
       <header className="site-header">
         <div className="shell header-inner">
           <button className="brand" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            
-           <a href="/" className="logo-group">
-  <span className="brand-mark">ψ</span> 
-  <span className="logo-text">EFSL</span>
-</a>
+            <span className="logo-group">
+              <span className="brand-mark">ψ</span>
+              <span className="logo-text">EFSL</span>
+            </span>
           </button>
 
           <nav className="site-nav" aria-label="Primary">
@@ -299,7 +298,6 @@ export default function App() {
               <a href="mailto:your.email@example.com">Email</a>
               <a href="https://github.com/your-github">GitHub</a>
               <a href="https://linkedin.com/in/your-linkedin">LinkedIn</a>
-              <a href="https://twitter.com/your-twitter">X / Twitter</a>
             </div>
           </div>
         </section>
