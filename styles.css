@@ -208,6 +208,85 @@ img {
   right: 0;
 }
 
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-dropdown-caret {
+  display: inline-block;
+  font-size: 0.65em;
+  transform: translateY(-1px);
+}
+
+.nav-dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 0.75rem;
+  min-width: 260px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 30;
+}
+
+.nav-dropdown:hover .nav-dropdown-panel,
+.nav-dropdown:focus-within .nav-dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(2px);
+}
+
+.nav-dropdown-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.6rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lift);
+  backdrop-filter: blur(16px);
+}
+
+.nav-dropdown-panel-inner .nav-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: normal;
+  transition: background 150ms ease;
+}
+
+.nav-dropdown-panel-inner .nav-dropdown-item::after {
+  content: none;
+}
+
+.nav-dropdown-panel-inner .nav-dropdown-item:hover,
+.nav-dropdown-panel-inner .nav-dropdown-item:focus-visible {
+  background: var(--accent-glow);
+}
+
+.nav-dropdown-item-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.nav-dropdown-item-meta {
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 main {
   padding-bottom: 3rem;
 }
