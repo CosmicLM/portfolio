@@ -50,7 +50,7 @@ function slugFromPath(path: string): string {
   return path.split("/").pop()!.replace(/\.md$/, "");
 }
 
-function splitFrontmatter(raw: string, source: string): { data: Record<string, unknown>; content: string } {
+export function splitFrontmatter(raw: string, source: string): { data: Record<string, unknown>; content: string } {
   const match = FRONTMATTER_PATTERN.exec(raw);
   if (!match) {
     throw new Error(`${source}: missing YAML frontmatter block (expected leading "---")`);
@@ -59,7 +59,7 @@ function splitFrontmatter(raw: string, source: string): { data: Record<string, u
   return { data, content: match[2] };
 }
 
-function validateFrontmatter(data: Record<string, unknown>, source: string): LogFrontmatter {
+export function validateFrontmatter(data: Record<string, unknown>, source: string): LogFrontmatter {
   const missing = ["title", "date", "type", "status", "pillars", "tags"].filter(
     (key) => data[key] === undefined
   );
@@ -89,12 +89,12 @@ function validateFrontmatter(data: Record<string, unknown>, source: string): Log
   };
 }
 
-function readingTimeFor(text: string): number {
+export function readingTimeFor(text: string): number {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));
 }
 
-function excerptFor(text: string, maxLength = 180): string {
+export function excerptFor(text: string, maxLength = 180): string {
   const plain = text
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/[#>*_`~[\]()-]/g, " ")

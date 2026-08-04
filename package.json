@@ -8,6 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "deploy": "vite build && wrangler deploy"
   },
   "dependencies": {
@@ -31,6 +33,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "typescript": "5.9.3",
     "vite": "^7.1.7",
+    "vitest": "^4.1.10",
     "wrangler": "^4.116.0"
   }
 }
