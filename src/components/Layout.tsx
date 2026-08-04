@@ -44,6 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Link to="/#projects">Projects</Link>
             <Link to="/#skills">Skills</Link>
             <Link to="/#experience">Experience</Link>
+            <Link to="/logs">Logs</Link>
             <Link to="/#contact">Contact</Link>
           </nav>
         </div>
