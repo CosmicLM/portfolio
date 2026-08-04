@@ -361,6 +361,10 @@ main {
   padding-bottom: 3rem;
 }
 
+.route-loading {
+  min-height: 60vh;
+}
+
 .hero {
   min-height: 78vh;
   display: grid;
