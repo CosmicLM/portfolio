@@ -1,6 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+const navProjects = [
+  {
+    slug: "anecho",
+    title: "Anecho",
+    meta: "NISQ-era error mitigation engine",
+  },
+  {
+    slug: "florinda",
+    title: "Florinda",
+    meta: "Voice-driven AI research assistant for Linux",
+  },
+];
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
 
@@ -41,7 +54,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <nav className="site-nav" aria-label="Primary">
             <Link to="/#about">About</Link>
-            <Link to="/#projects">Projects</Link>
+
+            <div className="nav-dropdown">
+              <Link to="/#projects" aria-haspopup="true">
+                Projects <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
+              </Link>
+              <div className="nav-dropdown-panel">
+                <div className="nav-dropdown-panel-inner">
+                  {navProjects.map((project) => (
+                    <Link
+                      key={project.slug}
+                      to={`/projects/${project.slug}`}
+                      className="nav-dropdown-item"
+                    >
+                      <span className="nav-dropdown-item-title">{project.title}</span>
+                      <span className="nav-dropdown-item-meta">{project.meta}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Link to="/#skills">Skills</Link>
             <Link to="/#experience">Experience</Link>
             <Link to="/logs">Logs</Link>
