@@ -92,12 +92,82 @@ body {
   transform: none;
 }
 
+/* Quantum heading entrance: text resolves out of a blurred, doubled
+   "superposition" as it scrolls into view — echoing measurement
+   collapsing a wavefunction into a definite state. */
+.heading-quantum {
+  position: relative;
+  filter: blur(6px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: filter 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heading-quantum::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reveal.is-visible .heading-quantum {
+  filter: blur(0);
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-visible .heading-quantum::before {
+  animation: quantum-collapse 650ms steps(1, end) forwards;
+}
+
+@keyframes quantum-collapse {
+  0% { opacity: 0.6; filter: blur(3px); transform: translate(4px, -3px); }
+  25% { opacity: 0.15; filter: blur(1px); transform: translate(-3px, 2px); }
+  50% { opacity: 0.5; filter: blur(2px); transform: translate(2px, -2px); }
+  75% { opacity: 0.1; filter: blur(0.5px); transform: translate(-1px, 1px); }
+  100% { opacity: 0; filter: blur(0); transform: translate(0, 0); }
+}
+
+/* Bra-ket accent on section eyebrows, drawn in alongside the reveal. */
+.ket-bracket {
+  display: inline-block;
+  color: var(--accent);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 350ms ease 150ms, transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1) 150ms;
+}
+
+.reveal.is-visible .ket-bracket {
+  opacity: 1;
+  transform: scale(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ambient-field {
     animation: none;
   }
 
   .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .heading-quantum {
+    filter: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .heading-quantum::before {
+    display: none;
+  }
+
+  .ket-bracket {
     opacity: 1;
     transform: none;
     transition: none;

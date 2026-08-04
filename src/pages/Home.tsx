@@ -103,7 +103,7 @@ export default function Home() {
       <section className="hero shell" id="home">
         <Reveal as="div" className="hero-copy">
           <p className="eyebrow">Quantum computing · AI systems · software engineering</p>
-          <h1>E. F. Souza Lima</h1>
+          <h1 className="heading-quantum" data-text="E. F. Souza Lima">E. F. Souza Lima</h1>
           <p className="subtitle">Computer Science student building real systems in quantum computing and AI.</p>
           <p className="lede">
             I build working projects at the intersection of quantum computing, AI, and classical software — including an error mitigation engine and a voice-driven research assistant — while studying Computer Science and leading my school's Quantum Computing Club.
@@ -123,8 +123,8 @@ export default function Home() {
         <Reveal as="div" className="shell section-header">
           <span className="section-index">01</span>
           <div className="section-heading">
-            <p className="eyebrow">About</p>
-            <h2>About Me</h2>
+            <p className="eyebrow"><span className="ket-bracket" aria-hidden="true">⟨</span>About<span className="ket-bracket" aria-hidden="true">⟩</span></p>
+            <h2 className="heading-quantum" data-text="About Me">About Me</h2>
           </div>
         </Reveal>
 
@@ -169,8 +169,8 @@ export default function Home() {
         <Reveal as="div" className="shell section-header">
           <span className="section-index">02</span>
           <div className="section-heading">
-            <p className="eyebrow">Projects</p>
-            <h2>Featured Projects</h2>
+            <p className="eyebrow"><span className="ket-bracket" aria-hidden="true">⟨</span>Projects<span className="ket-bracket" aria-hidden="true">⟩</span></p>
+            <h2 className="heading-quantum" data-text="Featured Projects">Featured Projects</h2>
           </div>
         </Reveal>
 
@@ -242,8 +242,8 @@ export default function Home() {
         <Reveal as="div" className="shell section-header">
           <span className="section-index">03</span>
           <div className="section-heading">
-            <p className="eyebrow">Skills</p>
-            <h2>Skills & Expertise</h2>
+            <p className="eyebrow"><span className="ket-bracket" aria-hidden="true">⟨</span>Skills<span className="ket-bracket" aria-hidden="true">⟩</span></p>
+            <h2 className="heading-quantum" data-text="Skills & Expertise">Skills & Expertise</h2>
           </div>
         </Reveal>
 
@@ -266,8 +266,8 @@ export default function Home() {
           <div className="section-heading-group">
             <span className="section-index">04</span>
             <div className="section-heading">
-              <p className="eyebrow">Experience</p>
-              <h2>Experience</h2>
+              <p className="eyebrow"><span className="ket-bracket" aria-hidden="true">⟨</span>Experience<span className="ket-bracket" aria-hidden="true">⟩</span></p>
+              <h2 className="heading-quantum" data-text="Experience">Experience</h2>
             </div>
           </div>
           <p className="section-note">Lead: Quantum Computing Club · Capstone: Anecho</p>
@@ -298,8 +298,8 @@ export default function Home() {
         <Reveal as="div" className="shell section-header">
           <span className="section-index">05</span>
           <div className="section-heading">
-            <p className="eyebrow">Contact</p>
-            <h2>Let's Connect</h2>
+            <p className="eyebrow"><span className="ket-bracket" aria-hidden="true">⟨</span>Contact<span className="ket-bracket" aria-hidden="true">⟩</span></p>
+            <h2 className="heading-quantum" data-text="Let's Connect">Let's Connect</h2>
           </div>
         </Reveal>
 
