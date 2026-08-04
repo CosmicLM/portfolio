@@ -301,6 +301,9 @@ export default function BlochSphere({
     };
 
     const onTouchStart = (e: TouchEvent) => {
+      // Without this, the browser treats the same touch as a page scroll,
+      // fighting the drag-rotate below and making it feel like it "glitches".
+      e.preventDefault();
       isDragging = true;
       coasting = false;
       autoRotate = false;
@@ -308,6 +311,7 @@ export default function BlochSphere({
     };
     const onTouchMove = (e: TouchEvent) => {
       if (!isDragging) return;
+      e.preventDefault();
       const dx = e.touches[0].clientX - prevMouse.x;
       const dy = e.touches[0].clientY - prevMouse.y;
       velY = dx * 0.008;
@@ -322,11 +326,15 @@ export default function BlochSphere({
     };
 
     if (interactive) {
+      // Belt-and-suspenders with the preventDefault() calls above: this
+      // tells the browser at the compositor level not to treat drags
+      // starting on the canvas as a page-scroll gesture in the first place.
+      renderer.domElement.style.touchAction = "none";
       renderer.domElement.addEventListener("mousedown", onMouseDown);
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
-      renderer.domElement.addEventListener("touchstart", onTouchStart, { passive: true });
-      window.addEventListener("touchmove", onTouchMove, { passive: true });
+      renderer.domElement.addEventListener("touchstart", onTouchStart, { passive: false });
+      window.addEventListener("touchmove", onTouchMove, { passive: false });
       window.addEventListener("touchend", onTouchEnd);
     }
 
